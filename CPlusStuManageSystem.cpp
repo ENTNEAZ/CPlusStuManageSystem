@@ -39,13 +39,11 @@
 ////			8.	save()					将链表信息存入文件后返回主函数，结束程序 
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <string>
 
 using namespace std;
 //
@@ -841,27 +839,30 @@ bool sexJudge(char sex[]);							//判断输入的性别是否为“男”或“
 
 class Stu {
 public:
-	//	void add();					//新增学生信息		
-	void addRaw(int id, char name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade);
-	void search();				//学生信息查询(按姓名)										
-	void change();				//修改学生信息（好像没要求写，自己加的）					
-	void del();					//删除学生信息												
-	void searchAll();			//学生信息统计（按专业或性别或年龄---年龄要自动计算）		
-	void sort(bool output);		//排序														
-	void printAll();			//输出全部信息
-
-	bool isExist(int id, bool output);					//检查输入学号是否已存在
+	Stu(int id, char name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade);
+	~Stu();
+	void printStu();			//输出这个人的信息									
+	void change();				//修改学生信息（好像没要求写，自己加的）		//类这么复杂的吗			
+	void del();					//删除学生信息
+	void setNext();				//设置next指针		//完全不一样啊这
+	static void add();			//新增学生
+	static void addRaw(int id, char name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade);
+	static void searchAll();	//学生信息统计（按专业或性别或年龄---年龄要自动计算）		
+	static void sort();			//排序									
+	static void printAll();		//输出全部信息
+	static void search();		//学生信息查询(按姓名)	
+	static bool isExist(int id,bool output);//检查输入学号是否已存在
 
 private:
 	int m_id;						//学号 
-	char m_name[15];				//姓名 
-	char m_sex[5];					//性别 
-	char m_field[30];				//专业 
+	string m_name;				//姓名 
+	string m_sex;					//性别 
+	string m_field;				//专业 
 	int m_year;						//出生日期 
 	int m_month;
 	int m_day;
-	char m_address[100];				//家庭地址 
-	float m_E_grade;					//英语入学成绩 
+	string m_address;				//家庭地址 
+	float m_E_grade;				//英语入学成绩 
 
 	Stu* next;
 };
@@ -900,43 +901,45 @@ void menu() //菜单
 		cout << endl;
 		cout << endl;
 		cout << "-----------------------------------------------------------------------------" << endl;
+		cout << endl;
 
 		cout << "请输入序号：";
 		cin >> userChoice;
 
+
 		switch (userChoice)
 		{
-			/*case 0:
-				load(true);
-				break;*/
+		//case 0:
+		//	load(true);
+		//	break;
 		case 1:
-			add();
+			Stu::add();
 			break;
 		case 2:
-			Stu.search();
+			Stu::search(); 
 			break;
-			/*case 3:
-				Stu.change();
-				break;
-			case 4:
-				Stu.del();
-				break;
-			case 5:
-				Stu.searchAll();
-				break;
-			case 6:
-				Stu.sort(true);
-				break;
-			case 7:
-				Stu.printAll();
-				break;
-			case 8:
-				save(true);
-				break;
-			case 9:
-				save(true);
-				return;
-				break;*/
+		case 3:
+			Stu::change();
+			break;
+		case 4:
+			Stu::del();
+			break;
+		case 5:
+			Stu::searchAll();
+			break;
+		case 6:
+			Stu::sort(true);
+			break;
+		case 7:
+			Stu::printAll();
+			 break;
+		case 8:
+			save(true);
+			break;
+		case 9:
+			save(true);
+			return;
+			break;
 		default:
 			cout << "无法识别，请重新输入" << endl;
 			system("pause");
@@ -945,21 +948,18 @@ void menu() //菜单
 }
 
 
-void add()
+void Stu::add()
 {
 	int id;
 
 	cout << "输入学号：";
 	cin >> id;
 
-	if (isExist(id, true))
-	{
+	if (Stu::isExist(id, true)){
 		system("pause");
 		return;//已经存在此人 返回菜单
-	}
-	else
-	{
-		char name[15], sex[5], field[30], address[100];
+	}else{
+		string name, sex, field, address;
 		float E_grade;
 		int year, month, day;
 
@@ -999,7 +999,7 @@ void add()
 			return;
 		}
 
-		addRaw(id, name, sex, field, year, month, day, address, E_grade);
+		Stu::addRaw(id, name, sex, field, year, month, day, address, E_grade);
 		cout << "添加成功" << endl;
 		system("pause");
 		return;
@@ -1099,9 +1099,9 @@ bool Stu::isExist(int id, bool output = false)//查重 output为是否输出已�
 	return false;
 }
 
-void Stu::addRaw(int id, char name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade)//赋值
+void Stu::addRaw(int id, s name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade)//赋值
 {
-	Stu* toAdd = new Stu();
+	Stu* toAdd = new Stu(id);
 	if (toAdd == NULL)
 	{
 		cout << "内存不足！无法添加" << endl;
@@ -1128,6 +1128,11 @@ void Stu::addRaw(int id, char name[], char sex[], char field[], int year, int mo
 		last->next = toAdd;
 		last = last->next;
 	}
+	return;
+}
+
+void Stu::setNext(Stu* item){
+	this->next = item;
 	return;
 }
 
@@ -1163,7 +1168,7 @@ void Stu::search()//查询
 
 int main()
 {
-	load();
+//	load();
 	menu();
 	return 0;
 }
