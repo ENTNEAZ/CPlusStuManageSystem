@@ -4,19 +4,29 @@
 #define DEBUG 0//让edited 和 original不工作
 using namespace std;
 
+void add();
+void del();
+
 bool birthdayJudge(int year, int month, int day);
 bool isLeap(int year, int month, int day);
 bool sexJudge(std::string sex);
-
 bool isExist(int id, bool output);
-void add();
-void del();
 
 class Stu {
 public:
 	static Stu* last;
 	static Stu* head;
-	Stu(int id, string name, string sex, string field, int year, int month, int day, string address, float E_grade) :id(id), name(name), sex(sex), field(field), year(year), month(month), day(day), address(address), gradeOfEnglish(E_grade) {
+	Stu(int id, string name, string sex, string field, int year, int month, int day, string address, float E_grade){
+		this->id = id;
+		this->name = name;
+		this->sex = sex;
+		this->field = field;
+		this->year = year;
+		this->month = month;
+		this->day = day;
+		this->address = address;
+		this->gradeOfEnglish = E_grade;
+		
 		this->before = Stu::last;
 		Stu::last = this;
 		if (this->before != nullptr) {//如果是nullptr 那就是没有元素 这是第一个元素
@@ -46,12 +56,13 @@ public:
 		this->gradeOfEnglish = E_grade;
 	}
 	void delStu() {
-		if (this->before != nullptr) {
+		if (this->before != nullptr) {//如果是nullptr 那就是没有元素 这是第一个元素
 			this->before->setNext(this->next);
 		}
 		else { //操作的是head
 			Stu::head == this->next;
 		}
+
 		if (this->next != nullptr) {
 			this->next->setBefore(this->before);
 		}
@@ -87,6 +98,7 @@ private:
 	int day;
 	string address;
 	float gradeOfEnglish;
+
 	Stu* before;
 	Stu* next;
 
@@ -173,7 +185,6 @@ bool isExist(int id, bool output) {
 
 void del(int id) {
 	Stu* item = Stu::head;
-	int id;
 	cout << "请输入要删除学生的学号：";
 	cin >> id;
 
