@@ -817,58 +817,62 @@ using namespace std;
 //void menu();				//菜单														
 //void load(bool output);		//导入学生信息												0.done
 void add();					//新增学生信息												1.done 
-//void search();				//学生信息查询(按姓名)											2.done
+void search();				//学生信息查询(按姓名)											2.done
 //void change();				//修改学生信息（好像没要求写，自己加的）							3.done
 //void del();					//删除学生信息												4.done
-//void searchAll();			//学生信息统计（按专业或性别或年龄---年龄要自动计算）				5.done
-//void sort(bool output);		//排序														6.done
-//void printAll();			//输出全部信息												7.done
+void searchAll();			//学生信息统计（按专业或性别或年龄---年龄要自动计算）				5.done
+void sort(bool output);		//排序														6.done
+void printAll();			//输出全部信息												7.done
 //void save(bool output);		//学生信息保存												8.done
 //
-//void addRaw(int id, char name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade);//赋值												
+void addRaw(int id, char name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade);//赋值												
 //void printStu(struct Stu* stu);						//输出学生信息
 //void screenField();									//按照专业筛选学生
 //void screenSex();									//按照性别筛选学生
 //void screenAge();									//按照年龄筛选学生
 //void updateLast();									//更新last指针
 //
-//bool isExist(int id,bool output);					//检查输入学号是否已存在
+bool isExist(int id,bool output);					//检查输入学号是否已存在
 bool birthdayJudge(int year, int month, int day);	//判断输入的出生日期是否有误
 bool isLeap(int year, int month, int day);			//月份为2时根据年份判断是否闰年，然后判断输入的出生日期是否有误
 bool sexJudge(char sex[]);							//判断输入的性别是否为“男”或“女”
 
 class Stu {
 public:
-	Stu(int id, char name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade);
-	~Stu();
+	Stu(int id, char name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade);//构造函数
+	~Stu();//析构函数
+
 	void printStu();			//输出这个人的信息									
-	void change();				//修改学生信息（好像没要求写，自己加的）		//类这么复杂的吗			
+	void change();				//修改学生信息（好像没要求写，自己加的）					
 	void del();					//删除学生信息
-	void setNext();				//设置next指针		//完全不一样啊这
-	static void add();			//新增学生
-	static void addRaw(int id, char name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade);
-	static void searchAll();	//学生信息统计（按专业或性别或年龄---年龄要自动计算）		
-	static void sort();			//排序									
-	static void printAll();		//输出全部信息
-	static void search();		//学生信息查询(按姓名)	
-	static bool isExist(int id,bool output);//检查输入学号是否已存在
+	void setNext();				//设置next指针		
 
 private:
-	int m_id;						//学号 
+	int m_id;					//学号 
 	string m_name;				//姓名 
-	string m_sex;					//性别 
+	string m_sex;				//性别 
 	string m_field;				//专业 
-	int m_year;						//出生日期 
+	int m_year;					//出生日期 
 	int m_month;
 	int m_day;
-	string m_address;				//家庭地址 
-	float m_E_grade;				//英语入学成绩 
+	string m_address;			//家庭地址 
+	float m_E_grade;			//英语入学成绩 
 
 	Stu* next;
 };
 
 Stu* head = nullptr;
 Stu* last = nullptr;
+
+Stu::Stu(int id, char name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade)
+{
+
+}
+
+Stu::~Stu()
+{
+
+}
 
 void menu() //菜单
 {
@@ -948,7 +952,7 @@ void menu() //菜单
 }
 
 
-void Stu::add()
+void add()
 {
 	int id;
 
@@ -1073,7 +1077,7 @@ bool sexJudge(char sex[])//判断输入的性别是否为“男”或“女”
 	return false;
 }
 
-bool Stu::isExist(int id, bool output = false)//查重 output为是否输出已经存在的信息
+bool isExist(int id, bool output = false)//查重 output为是否输出已经存在的信息
 {
 	if (head == NULL)
 	{
@@ -1099,7 +1103,7 @@ bool Stu::isExist(int id, bool output = false)//查重 output为是否输出已�
 	return false;
 }
 
-void Stu::addRaw(int id, s name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade)//赋值
+void addRaw(int id, s name[], char sex[], char field[], int year, int month, int day, char address[], float E_grade)//赋值
 {
 	Stu* toAdd = new Stu(id);
 	if (toAdd == NULL)
@@ -1136,7 +1140,7 @@ void Stu::setNext(Stu* item){
 	return;
 }
 
-void Stu::search()//查询 
+void search()//查询 
 {
 	Stu* item = head;
 	char inputName[15]{};
