@@ -5,7 +5,6 @@
 bool birthdayJudge(int year, int month, int day);
 bool isLeap(int year, int month, int day);
 
-
 bool birthdayJudge(int year, int month, int day)
 {
 	time_t  t;
