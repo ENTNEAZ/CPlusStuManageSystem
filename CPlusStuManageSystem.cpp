@@ -4,6 +4,12 @@
 #define DEBUG 0//让edited 和 original不工作
 using namespace std;
 
+bool birthdayJudge(int year, int month, int day);
+bool isLeap(int year, int month, int day);
+bool sexJudge(std::string sex);
+
+bool isExist(int id, bool output);
+void add();
 
 class Stu {
 public:
@@ -39,7 +45,22 @@ public:
 	void delStu() {
 		this->before->setNext(this->next);
 		this->next->setBefore(this->before);
+		if (Stu::last == this) {
+			Stu::last = this->before;
+		}
+		if (Stu::head == this) {
+			Stu::head == this->next;
+		}
 		delete this;
+	}
+	int getId() {
+		return this->id;
+	}
+	Stu* getBefore() {
+		return this->before;
+	}
+	Stu* getNext() {
+		return this->next;
 	}
 	void setNext(Stu* item) {
 		this->next = item;
@@ -64,6 +85,105 @@ private:
 
 };
 
+
+void add()//增加 
+{
+	int id;
+
+	cout << "输入学号：";
+	cin >> id;
+
+	if (isExist(id, true))
+	{
+		system("pause");
+		return;//已经存在此人 返回菜单
+	}
+	else
+	{
+		char name[15], sex[5], field[30], address[100];
+		float E_grade;
+		int year, month, day;
+
+		cout << "输入姓名: ";
+		cin >> name;
+
+		cout << "输入性别: ";
+		cin >> sex;
+
+		cout << "输入专业: ";
+		cin >> field;
+
+		cout << "请输入出生年份: ";
+		cin >> year;
+
+		cout << "请输入出生月份: ";
+		cin >> month;
+
+		cout << "请输入出生日期: ";
+		cin >> day;
+
+		cout << "输入家庭地址: ";
+		cin >> address;
+
+		cout << "输入英语入学成绩：";
+		cin >> E_grade;
+
+		if (!birthdayJudge(year, month, day))
+		{
+			cout << "日期输入有误，返回至菜单" << endl;
+			system("pause");
+			return;
+		}
+
+		if (!sexJudge(sex))
+		{
+			cout << "性别输入不符实际，返回至菜单" << endl;
+			system("pause");
+			return;
+		}
+
+		Stu* toAdd = nullptr;
+		toAdd = new Stu(id,name,sex,field,year,month,day,address,E_grade);
+		cout << "添加成功" << endl;
+		system("pause");
+		return;
+	}
+}
+
+bool isExist(int id, bool output) {
+	Stu* item = Stu::head;
+	while (item != nullptr) {
+		if (item->getId() == id) {
+			if (output) {
+				item->printStu();
+				cout << "学号已存在，请重新输入" << endl;
+			}
+			return true;
+		}
+		item = item->getNext();
+	}
+}
+
+void del(int id) {
+	Stu* item = Stu::head;
+	int id;
+	cout << "请输入要删除学生的学号：";
+	cin >> id;
+
+	while (item != nullptr) {
+		if (item->getId() == id) {
+			item->printStu();
+			item->delStu();
+			cout << "该学生信息已删除" << endl;
+			system("pause");
+			return;
+		}
+	}
+	cout << "学号不存在！返回至菜单:" << endl;
+	system("pause");
+	return;
+
+}
 
 int main() {
 	Stu::last = nullptr;
