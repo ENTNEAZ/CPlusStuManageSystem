@@ -14,6 +14,7 @@ void change();			//修改													//done
 void search();			//查找													//done
 void censusAll();		//学生信息统计（按专业或性别或年龄---年龄要自动计算）	//done
 void printAll();		//输出全部学生信息										//done
+void sort(boo output = false);
 void load(bool output);//导入
 void save(bool output);//导出（学生信息保存）
 
@@ -143,6 +144,80 @@ private:
 
 };
 
+void menu() //菜单
+{
+	int userChoice;
+
+	while (true)
+	{
+		system("cls");//清屏
+
+		cout << endl;
+		cout << endl;
+		cout << endl;
+		cout << "----------------------------学生基本信息管理系统----------------------------" << endl;
+		cout << endl;
+		cout << endl;
+		cout << "0.导入学生信息（默认已自动导入）" << endl;
+		cout << "1.新增学生信息 " << endl;
+		cout << "2.查询学生信息 " << endl;
+		cout << "3.修改学生信息 " << endl;
+		cout << "4.删除学生信息 " << endl;
+		cout << "5.学生信息统计 " << endl;
+		cout << "6.学生成绩排序 " << endl;
+		cout << "7.学生信息总览 " << endl;
+		cout << "8.学生信息储存 " << endl;
+		cout << "9.保存并安全退出" << endl;
+		cout << endl;
+		cout << endl;
+		cout << "使用注意事项" << endl;
+		cout << "进行“增加”、“修改”、“删除”操作后，务必将信息储存，否则不会保存在文件内！" << endl;
+		cout << endl;
+		cout << endl;
+		cout << "-----------------------------------------------------------------------------" << endl;
+
+		cout << "请输入序号：";
+		cin >> userChoice;
+
+		switch (userChoice)
+		{
+		case 0:
+			load(true);
+			break;
+		case 1:
+			add();
+			break;
+		case 2:
+			search();
+			break;
+		case 3:
+			change();
+			break;
+		case 4:
+			del();
+			break;
+		case 5:
+			censusAll();
+			break;
+		case 6:
+			sort(true);
+			break;
+		case 7:
+			printAll();
+			break;
+		case 8:
+			save(true);
+			break;
+		case 9:
+			save(true);
+			return;
+			break;
+		default:
+			cout << "无法识别，请重新输入" << endl;
+			system("pause");
+		}
+	}
+}
 
 void add()//增加 
 {
@@ -544,7 +619,6 @@ void save(bool output = false)//文件存放
 	ofstream file;
 	Stu* item = Stu::head;
 	file.open("information.txt");
-	Stu* item = Stu::head;
 	while (item != NULL && file.good())
 	{
 		file << item->getId() << endl;
