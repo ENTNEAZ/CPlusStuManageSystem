@@ -5,8 +5,19 @@
 
 using namespace std;
 
-void add();
-void del();
+//void menu();			//菜单
+void add();				//增加													//done
+void del();				//删除													//done
+void change();			//修改													//done
+void search();			//查找													//done
+void censusAll();		//学生信息统计（按专业或性别或年龄---年龄要自动计算）	//done
+void printAll();		//输出全部学生信息										//done
+void load(bool output);//导入
+void save(bool output);//导出（学生信息保存）
+
+void screenField();		//按照专业筛选
+void screenSex();		//按照性别筛选
+void screenAge();		//按照年龄筛选
 
 bool birthdayJudge(int year, int month, int day);
 bool isLeap(int year, int month, int day);
@@ -72,15 +83,40 @@ public:
 		}
 		delete this;
 	}
-	int getId() {
-		return this->id;
+	int getId() {					
+		return this->id;			//获取该对象的id
 	}
-	Stu* getBefore() {
+	string getName() {				
+		return this->name;			//获取该对象的name
+	}
+	string getSex() {
+		return this->sex;			//获取该对象的sex
+	}
+	string getField() {
+		return this->field;			//获取该对象的field
+	}
+	int getYear() {
+		return this->year;			//获取该对象的year
+	}
+	int getMonth() {
+		return this->month;			//获取该对象的month
+	}
+	int getDay() {
+		return this->day;			//获取该对象的day
+	}
+	string getAddress() {
+		return this->address;		//获取该对象的address
+	}
+	float getE_grade() {
+		return this->gradeOfEnglish;//获取该对象的gradeOfEnglish
+	}
+	Stu* getBefore() {				
 		return this->before;
 	}
 	Stu* getNext() {
 		return this->next;
 	}
+
 	void setNext(Stu* item) {
 		this->next = item;
 	}
@@ -185,7 +221,8 @@ bool isExist(int id, bool output) {
 	return false;
 }
 
-void del(int id) {
+void del() {
+	int id;
 	Stu* item = Stu::head;
 	cout << "请输入要删除学生的学号：";
 	cin >> id;
@@ -198,14 +235,346 @@ void del(int id) {
 			system("pause");
 			return;
 		}
+		item = item->getNext();
 	}
 	cout << "学号不存在！返回至菜单:" << endl;
 	system("pause");
 	return;
-
 }
+
+void change(){
+	int id;
+	Stu* item = Stu::head;
+	cout << "请输入要修改学生的学号：";
+	cin >> id;
+
+	while (item != nullptr) {
+		if (item->getId() == id) {
+
+			item->printStu();
+
+			char name[15], sex[5], field[30], address[100];
+			float E_grade;
+			int year, month, day;
+
+			cout << "开始修改" << endl;
+
+			cout << "输入姓名: ";
+			cin >> name;
+
+			cout << "输入性别: ";
+			cin >> sex;
+
+			cout << "输入专业: ";
+			cin >> field;
+
+			cout << "请输入出生年份: ";
+			cin >> year;
+
+			cout << "请输入出生月份: ";
+			cin >> month;
+
+			cout << "请输入出生日期: ";
+			cin >> day;
+
+			cout << "输入家庭地址: ";
+			cin >> address;
+
+			cout << "输入英语入学成绩：";
+			cin >> E_grade;
+
+			if (!birthdayJudge(year, month, day))
+			{
+				cout << "日期输入有误，返回至菜单" << endl;
+				system("pause");
+				return;
+			}
+
+			if (!sexJudge(sex))
+			{
+				cout << "性别输入不符实际，返回至菜单" << endl;
+				system("pause");
+				return;
+			}
+
+			item->changeInformation(id, name, sex, field, year, month, day, address, E_grade);
+			cout << endl;
+			cout << "该学生信息已修改" << endl;
+			cout << endl;
+			item->printStu();
+			system("pause");
+			return;
+		}
+		item = item->getNext();
+	}
+	cout << "学号不存在！返回至菜单:" << endl;
+	system("pause");
+	return;
+}
+
+void search()
+{
+	Stu* item = Stu::head;
+	string inputName;
+
+	cout << "输入要查询学生的姓名:";
+	cin >> inputName;
+
+	cout << "下面是数据库内有关" << inputName << "的信息" << endl;
+	cout << endl;
+
+	while (item != NULL)
+	{
+		if (item->getName() ==  inputName)
+		{
+			item->printStu();
+			//防止重名 继续执行
+			item = item->getNext();
+		}
+		else {
+			item = item->getNext();
+		}
+	}
+	cout << "以上是数据库内有关" << inputName << "的信息" << endl;
+	cout << endl;
+	system("pause");
+	return;
+}
+
+void censusAll()
+{
+	int userChoice;
+
+	while (true)
+	{
+		system("cls");
+		cout << endl;
+		cout << "----------------------------学生信息统计系统----------------------------" << endl;
+		cout << endl;
+		cout << endl;
+		cout << "1.按照专业筛选" << endl;
+		cout << "2.按照性别筛选" << endl;
+		cout << "3.按照年龄筛选" << endl;
+		cout << "4.输出全部学生信息" << endl;
+		cout << endl;
+		cout << "5.返回主菜单" << endl;
+		cout << endl;
+		cout << endl;
+		cout << "------------------------------------------------------------------------" << endl;
+		cout << endl;
+		cout << endl;
+
+		cout << "请输入序号:";
+		cin >> userChoice;
+
+		switch (userChoice)
+		{
+		case 1:
+			screenField();
+			break;
+		case 2:
+			screenSex();
+			break;
+		case 3:
+			screenAge();
+			break;
+		case 4:
+			printAll();
+			break;
+		case 5:
+			return;
+			break;
+		default:
+			cout << "无法识别，请重新输入！" << endl;
+			system("pause");
+		}
+	}
+}
+
+void screenField()
+{
+	Stu* item = Stu::head;
+	string findField;
+	int count = 0;
+
+	cout << "请输入要筛选出的专业：" << endl;
+	cin >> findField;
+
+	cout << endl << "以下是数据库中的信息：" << endl;
+
+	while (item != NULL)
+	{
+		if (item->getField() == findField)
+		{
+			item->printStu();
+			count++;
+		}
+		item = item->getNext();
+	}
+
+	cout << endl;
+	cout << "符合条件的学生有" << count << "个" << endl;
+	cout << "----------------------------------------------------------" << endl;
+	system("pause");
+	return;
+}
+
+void screenSex()//按照性别筛选出符合条件的学生
+{
+	Stu* item = Stu::head;
+	string findSex;
+	int count = 0;
+
+	cout << "请输入要筛选出的性别：" << endl;
+	cin >> findSex;
+
+	cout << endl << "以下是数据库中的信息：" << endl;
+
+	while (item != NULL)
+	{
+		if (item->getSex() == findSex)
+		{
+			item->printStu();
+			count++;
+		}
+		item = item->getNext();
+	}
+
+	cout << endl;
+	cout << "符合条件的学生有" << count << "个" << endl;
+	cout << "----------------------------------------------------------" << endl;
+	system("pause");
+	return;
+}
+
+void screenAge()
+{
+	Stu* item = Stu::head;
+	int findAge;
+	int count = 0;
+
+	time_t  t;
+	time(&t);
+
+	cout << "请输入要筛选出的年龄：";
+	cin >> findAge;
+
+	cout << endl << "以下是数据库中的信息：" << endl;
+
+	while (item != NULL)
+	{
+		if ((localtime(&t)->tm_year + 1900) - item->getYear() == findAge)
+		{
+			item->printStu();
+			count++;
+		}
+		item = item->getNext();
+	}	
+
+	cout << endl;
+	cout << "符合条件的学生有" << count << "个" << endl;
+	cout << "----------------------------------------------------------" << endl;
+	system("pause");
+	return;
+}
+
+void printAll()
+{
+	Stu* item = Stu::head;
+	int count = 0;
+	
+	while (item != NULL)
+	{
+		item->printStu();
+		count++;
+		item = item->getNext();
+	}
+
+	cout << endl;
+	cout << "符合条件的学生有" << count << "个" << endl;
+	cout << "----------------------------------------------------------" << endl;
+	system("pause");
+	return;
+}
+
+void load(bool output = false) //
+{
+	ifstream file;
+	string name, sex, field, address;
+	float E_grade;
+	int id, year, month, day;
+	bool haveNext = true;
+	file.open("information.txt");
+
+	while (file.good() && !(file.peek() == EOF))
+	{
+		file >> id;
+		file.ignore();
+
+		file >> name;
+		file >> sex;
+		file >> field;
+
+		file >> year;
+		file >> month;
+		file >> day;
+		file.ignore();
+
+		file >> address;
+		file >> E_grade;
+		file.ignore();
+
+		Stu* toAdd = nullptr;
+		toAdd = new Stu(id, name, sex, field, year, month, day, address, E_grade);
+	}
+	file.close();
+
+	if (output)
+	{
+		cout << "导入成功" << endl;
+		system("pause");
+	}
+	return;
+}
+
+void save(bool output = false)//文件存放
+{
+	ofstream file;
+	Stu* item = Stu::head;
+	file.open("information.txt");
+	Stu* item = Stu::head;
+	while (item != NULL && file.good())
+	{
+		file << item->getId() << endl;
+		file << item->getName() << endl;
+		file << item->getSex() << endl;
+		file << item->getField() << endl;
+		file << item->getYear() << endl;
+		file << item->getMonth() << endl;
+		file << item->getDay() << endl;
+		file << item->getAddress() << endl;
+		file << item->getE_grade() << endl;
+
+		item = item->getNext();
+	}
+
+	file.close();
+
+	if (output)
+	{
+		cout << "导出成功" << endl;
+		system("pause");
+	}
+	return;
+}
+
+
+
+	
 Stu* Stu::last = nullptr;
 Stu* Stu::head = nullptr;
+
+
 int main() {
 	
 	return 0;

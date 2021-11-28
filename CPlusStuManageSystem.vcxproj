@@ -143,6 +143,7 @@
     <ClCompile Include="Edited.cpp" />
     <ClCompile Include="Original.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="censusAll.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
