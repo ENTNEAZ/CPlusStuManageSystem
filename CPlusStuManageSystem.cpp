@@ -14,7 +14,7 @@ void change();			//修改													//done
 void search();			//查找													//done
 void censusAll();		//学生信息统计（按专业或性别或年龄---年龄要自动计算）	//done
 void printAll();		//输出全部学生信息										//done
-void sort(boo output = false);
+void sort(bool output = false);
 void load(bool output);//导入
 void save(bool output);//导出（学生信息保存）
 
