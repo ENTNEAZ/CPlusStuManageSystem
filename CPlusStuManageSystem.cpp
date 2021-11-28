@@ -46,13 +46,17 @@ public:
 		this->gradeOfEnglish = E_grade;
 	}
 	void delStu() {
-		this->before->setNext(this->next);
-		this->next->setBefore(this->before);
-		if (Stu::last == this) {
-			Stu::last = this->before;
+		if (this->before != nullptr) {
+			this->before->setNext(this->next);
 		}
-		if (Stu::head == this) {
+		else { //操作的是head
 			Stu::head == this->next;
+		}
+		if (this->next != nullptr) {
+			this->next->setBefore(this->before);
+		}
+		else { //操作的是last
+			Stu::last = this->before;
 		}
 		delete this;
 	}
@@ -146,7 +150,7 @@ void add()//增加
 		}
 
 		Stu* toAdd = nullptr;
-		toAdd = new Stu(id,name,sex,field,year,month,day,address,E_grade);
+		toAdd = new Stu(id, name, sex, field, year, month, day, address, E_grade);
 		cout << "添加成功" << endl;
 		system("pause");
 		return;
@@ -173,34 +177,6 @@ void del(int id) {
 	cout << "请输入要删除学生的学号：";
 	cin >> id;
 
-void Stu::setNext(Stu* item){
-	this->next = item;
-	return;
-}
-
-void search()//查询 
-{
-	Stu* item = head;
-	char inputName[15]{};
-
-	cout << "输入要查询学生的姓名:";
-	cin >> inputName;
-
-	inputName[14] = '\0';//防止用户输入过长 导致没有\0
-	cout << "下面是数据库内有关" << inputName << "的信息" << endl;
-	cout << endl;
-
-	while (item != NULL)
-	{
-		if (strcmp(item->m_name, inputName) == 0)
-		{
-			printStu(item);
-			//防止重名 继续执行
-			item = item->next;
-		}
-		else {
-			item = item->next;
-		}
 	while (item != nullptr) {
 		if (item->getId() == id) {
 			item->printStu();
