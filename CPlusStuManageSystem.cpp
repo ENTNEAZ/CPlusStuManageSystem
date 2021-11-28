@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <string>
 #include <iomanip>
+#include <fstream>
+
 #define DEBUG 0//让edited 和 original不工作
 
 using namespace std;
