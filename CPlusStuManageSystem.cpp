@@ -173,6 +173,34 @@ void del(int id) {
 	cout << "请输入要删除学生的学号：";
 	cin >> id;
 
+void Stu::setNext(Stu* item){
+	this->next = item;
+	return;
+}
+
+void search()//查询 
+{
+	Stu* item = head;
+	char inputName[15]{};
+
+	cout << "输入要查询学生的姓名:";
+	cin >> inputName;
+
+	inputName[14] = '\0';//防止用户输入过长 导致没有\0
+	cout << "下面是数据库内有关" << inputName << "的信息" << endl;
+	cout << endl;
+
+	while (item != NULL)
+	{
+		if (strcmp(item->m_name, inputName) == 0)
+		{
+			printStu(item);
+			//防止重名 继续执行
+			item = item->next;
+		}
+		else {
+			item = item->next;
+		}
 	while (item != nullptr) {
 		if (item->getId() == id) {
 			item->printStu();
