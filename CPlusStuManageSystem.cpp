@@ -2,6 +2,7 @@
 #include <string>
 #include <iomanip>
 #define DEBUG 0//让edited 和 original不工作
+
 using namespace std;
 
 void add();
@@ -203,9 +204,9 @@ void del(int id) {
 	return;
 
 }
-
+Stu* Stu::last = nullptr;
+Stu* Stu::head = nullptr;
 int main() {
-	Stu::last = nullptr;
-	Stu::head = nullptr;
+	
 	return 0;
 }
