@@ -1,6 +1,5 @@
 #include <ctime>
 #include <string>
-#ifdef DEBUG
 
 bool birthdayJudge(int year, int month, int day);
 bool isLeap(int year, int month, int day);

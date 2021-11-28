@@ -60,7 +60,7 @@ public:
 			this->before->setNext(this->next);
 		}
 		else { //操作的是head
-			Stu::head == this->next;
+			Stu::head = this->next;
 		}
 
 		if (this->next != nullptr) {
@@ -181,6 +181,7 @@ bool isExist(int id, bool output) {
 		}
 		item = item->getNext();
 	}
+	return false;
 }
 
 void del(int id) {
