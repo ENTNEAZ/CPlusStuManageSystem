@@ -574,6 +574,27 @@ void printAll()
 	return;
 }
 
+void exchange(Stu* item1,Stu* item2) { // 交换两个东西
+	if (item1->getBefore() == nullptr) { //这是head
+		Stu::head == item2;
+	}
+	else {
+		item1->getBefore()->setNext(item2);
+	}
+	item2->setBefore(item1->getBefore());
+
+	if (item2->getNext() == nullptr) { //这是last啊
+		Stu::last = item1;
+	}
+	else {
+		item2->getNext()->setBefore(item1);
+	}
+	item1->setNext(item2->getNext());
+	item2->setNext(item1);
+	item1->setBefore(item2);
+
+}
+
 void load(bool output = false) //
 {
 	ifstream file;
