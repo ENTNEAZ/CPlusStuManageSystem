@@ -10,6 +10,7 @@ bool sexJudge(std::string sex);
 
 bool isExist(int id, bool output);
 void add();
+void del();
 
 class Stu {
 public:
