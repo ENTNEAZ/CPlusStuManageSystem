@@ -41,11 +41,13 @@ public:
 		this->day = day;
 		this->address = address;
 		this->gradeOfEnglish = E_grade;
-		
 		this->before = Stu::last;
 		Stu::last = this;
 		if (this->before != nullptr) {//如果是nullptr 那就是没有元素 这是第一个元素
 			this->before->setNext(this->next);
+		}
+		else {
+			Stu::head = this;
 		}
 		this->next = nullptr;
 	}
@@ -151,12 +153,7 @@ void menu() //菜单
 	while (true)
 	{
 		system("cls");//清屏
-
-		cout << endl;
-		cout << endl;
-		cout << endl;
 		cout << "----------------------------学生基本信息管理系统----------------------------" << endl;
-		cout << endl;
 		cout << endl;
 		cout << "0.导入学生信息（默认已自动导入）" << endl;
 		cout << "1.新增学生信息 " << endl;
@@ -172,8 +169,6 @@ void menu() //菜单
 		cout << endl;
 		cout << "使用注意事项" << endl;
 		cout << "进行“增加”、“修改”、“删除”操作后，务必将信息储存，否则不会保存在文件内！" << endl;
-		cout << endl;
-		cout << endl;
 		cout << "-----------------------------------------------------------------------------" << endl;
 
 		cout << "请输入序号：";
@@ -695,7 +690,7 @@ Stu* Stu::head = nullptr;
 
 
 int main() {
-	load(true);
+	load(false);
 	menu();
 	return 0;
 }
