@@ -13,7 +13,7 @@ void del();				//删除													//done
 void change();			//修改													//done
 void search();			//查找													//done
 void censusAll();		//学生信息统计（按专业或性别或年龄---年龄要自动计算）	//done
-void printAll();		//输出全部学生信息										//done
+void printAll(bool reverse);		//输出全部学生信息										//done
 void sort(bool output = false);
 void load(bool output);//导入
 void save(bool output);//导出（学生信息保存）
@@ -44,7 +44,7 @@ public:
 		this->before = Stu::last;
 		Stu::last = this;
 		if (this->before != nullptr) {//如果是nullptr 那就是没有元素 这是第一个元素
-			this->before->setNext(this->next);
+			this->before->setNext(this);
 		}
 		else {
 			Stu::head = this;
@@ -173,7 +173,6 @@ void menu() //菜单
 
 		cout << "请输入序号：";
 		cin >> userChoice;
-
 		switch (userChoice)
 		{
 		case 0:
@@ -198,7 +197,7 @@ void menu() //菜单
 			sort(true);
 			break;
 		case 7:
-			printAll();
+			printAll(false);
 			break;
 		case 8:
 			save(true);
@@ -437,7 +436,7 @@ void censusAll()
 
 		cout << "请输入序号:";
 		cin >> userChoice;
-
+		string choice = "";
 		switch (userChoice)
 		{
 		case 1:
@@ -450,7 +449,12 @@ void censusAll()
 			screenAge();
 			break;
 		case 4:
-			printAll();
+			cout << "是否要倒序输出？(是Y否N)";
+			cin >> choice;
+			if (choice == "Y")
+				printAll(true);
+			else
+				printAll(false);
 			break;
 		case 5:
 			return;
@@ -549,20 +553,27 @@ void screenAge()
 	return;
 }
 
-void printAll()
+void printAll(bool reverse = false)
 {
-	Stu* item = Stu::head;
+	Stu* item;
+	if(reverse)
+		item = Stu::last;
+	else
+		item = Stu::head;
 	int count = 0;
 	
 	while (item != NULL)
 	{
 		item->printStu();
 		count++;
-		item = item->getNext();
+		if (reverse)
+			item = item->getBefore();
+		else
+			item = item->getNext();
 	}
 
 	cout << endl;
-	cout << "符合条件的学生有" << count << "个" << endl;
+	cout << "学生共有" << count << "个" << endl;
 	cout << "----------------------------------------------------------" << endl;
 	system("pause");
 	return;
