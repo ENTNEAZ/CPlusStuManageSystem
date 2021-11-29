@@ -407,8 +407,7 @@ void search()
 			item->printStu();
 			//防止重名 继续执行
 			item = item->getNext();
-		}
-		else {
+		}else {
 			item = item->getNext();
 		}
 	}
