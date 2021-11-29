@@ -689,11 +689,14 @@ void sort(bool output)
 			if (item->getE_grade() < item->getNext()->getE_grade())
 			{
 				exchange(item, item->getNext());//调用交换函数
-				//exchange后冒泡原理中指针变化了
-				//为了消除这个变化
-				//向前一位
+				// exchange后
+				// 冒泡原理中指针变化了（原本是第几个 现在这种对象指针在交换过程中 原本冒泡排序中指向第n个的不应该变的指针变成指向第n+1个 无形中出错）
+				// （但又要保证没有错误）
+				// 为了消除这个变化
+				// 当前指针向前一位
 				// 
-				//若想没有下面语句 则需要比较的是 item 和 item->before()
+				// 若想没有下面语句 则需要比较的是 item 和 item->before()
+				// 或者优化为其他算法
 				item = item->getBefore();
 			}
 		}
