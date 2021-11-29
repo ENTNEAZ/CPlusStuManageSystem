@@ -681,7 +681,7 @@ void sort(bool output)
 		return;//一个都没有或者就一个
 	}
 
-	while (Stu::head->getNext() != end && Stu::head != end)
+	while (Stu::head->getNext() != end)
 	{
 		item = Stu::head;//复位
 		for (; item->getNext() != end; item = item->getNext())
