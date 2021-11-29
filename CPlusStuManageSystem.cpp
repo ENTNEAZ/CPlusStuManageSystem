@@ -576,7 +576,7 @@ void printAll()
 
 void exchange(Stu* item1,Stu* item2) { // 交换两个东西
 	if (item1->getBefore() == nullptr) { //这是head
-		Stu::head == item2;
+		Stu::head = item2;
 	}
 	else {
 		item1->getBefore()->setNext(item2);
@@ -665,7 +665,30 @@ void save(bool output = false)//文件存放
 	return;
 }
 
+void sort(bool output)
+{
+	Stu* item = Stu::head;
+	Stu* end = nullptr;
+	if (item == nullptr || item->getNext() == nullptr)
+	{
+		cout << "排序成功，已按照英语成绩进行排序" << endl;
+		system("pause");
+		return;//一个都没有或者就一个
+	}
 
+	while (Stu::head->getNext() != end)
+	{
+		item = Stu::head;//复位
+		for (; item->getNext() != end; item = item->getNext())
+		{
+			if (item->getE_grade() < item->getNext()->getE_grade())
+			{
+				exchange(item, item->getNext());//调用交换函数
+			}
+		}
+		end = item->getNext();
+	}
+}
 
 	
 Stu* Stu::last = nullptr;
@@ -673,6 +696,7 @@ Stu* Stu::head = nullptr;
 
 
 int main() {
-	
+	load(true);
+	menu();
 	return 0;
 }
