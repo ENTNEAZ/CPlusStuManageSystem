@@ -692,6 +692,8 @@ void sort(bool output)
 				//exchange后冒泡原理中指针变化了
 				//为了消除这个变化
 				//向前一位
+				// 
+				//若想没有下面语句 则需要比较的是 item 和 item->before()
 				item = item->getBefore();
 			}
 		}
