@@ -681,7 +681,7 @@ void sort(bool output)
 		return;//一个都没有或者就一个
 	}
 
-	while (Stu::head->getNext() != end)
+	while (Stu::head->getNext() != end && Stu::head != end)
 	{
 		item = Stu::head;//复位
 		for (; item->getNext() != end; item = item->getNext())
@@ -689,10 +689,17 @@ void sort(bool output)
 			if (item->getE_grade() < item->getNext()->getE_grade())
 			{
 				exchange(item, item->getNext());//调用交换函数
+				//exchange后冒泡原理中指针变化了
+				//为了消除这个变化
+				//向前一位
+				item = item->getBefore();
 			}
 		}
-		end = item->getNext();
+		end = (end == nullptr)?Stu::last:end->getBefore();
 	}
+	cout << "排序成功，已按照英语成绩进行排序" << endl;
+	system("pause");
+	return;
 }
 
 	
