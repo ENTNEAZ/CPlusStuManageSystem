@@ -3,11 +3,12 @@
 #include <iomanip>
 #include <fstream>
 
+
 #define DEBUG 0//让edited 和 original不工作
 
 using namespace std;
 
-//void menu();			//菜单
+void menu();			//菜单
 void add();				//增加													//done
 void del();				//删除													//done
 void change();			//修改													//done
@@ -160,7 +161,7 @@ void menu() //菜单
 		cout << "2.查询学生信息 " << endl;
 		cout << "3.修改学生信息 " << endl;
 		cout << "4.删除学生信息 " << endl;
-		cout << "5.学生信息统计 " << endl;
+		cout << "5.学生信息统计     内含专业筛选、性别筛选、年龄筛选 " << endl;
 		cout << "6.学生成绩排序 " << endl;
 		cout << "7.学生信息总览 " << endl;
 		cout << "8.学生信息储存 " << endl;
