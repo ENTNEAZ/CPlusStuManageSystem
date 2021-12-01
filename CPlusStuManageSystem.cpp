@@ -9,7 +9,7 @@
 
 using namespace std;
 
-//void menu();			//菜单
+void menu();			//菜单
 void add();				//增加													//done
 void del();				//删除													//done
 void change();			//修改													//done
