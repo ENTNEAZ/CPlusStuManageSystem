@@ -30,14 +30,6 @@
     <ClCompile Include="censusAll.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="StuClass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="StuClass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="censusAll.h">
