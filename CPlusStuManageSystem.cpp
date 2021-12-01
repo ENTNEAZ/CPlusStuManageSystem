@@ -29,8 +29,6 @@ bool isLeap(int year, int month, int day);
 bool sexJudge(std::string sex);
 bool isExist(int id, bool output);
 
-
-
 void menu() //菜单
 {
 	int userChoice;
