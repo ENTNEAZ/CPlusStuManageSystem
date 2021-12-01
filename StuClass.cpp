@@ -4,7 +4,8 @@
 #include "StuClass.h"
 
 
-Stu::Stu(int id, string name, string sex, string field, int year, int month, int day, string address, float E_grade) {
+Stu::Stu(int id, string name, string sex, string field, int year, int month, int day, string address, float E_grade) 
+{
 	this->id = id;
 	this->name = name;
 	this->sex = sex;
@@ -16,15 +17,19 @@ Stu::Stu(int id, string name, string sex, string field, int year, int month, int
 	this->gradeOfEnglish = E_grade;
 	this->before = Stu::last;
 	Stu::last = this;
-	if (this->before != nullptr) {//如果是nullptr 那就是没有元素 这是第一个元素
+	if (this->before != nullptr) 
+	{//如果是nullptr 那就是没有元素 这是第一个元素
 		this->before->setNext(this);
 	}
-	else {
+	else 
+	{
 		Stu::head = this;
 	}
 	this->next = nullptr;
 }
-void Stu::printStu() {
+
+void Stu::printStu() 
+{
 	cout << "学号:" << std::left << setw(12) << this->id;
 	cout << "姓名:" << std::left << setw(10) << this->name;
 	cout << "性别:" << std::left << setw(5) << this->sex;
@@ -34,7 +39,9 @@ void Stu::printStu() {
 	cout << "英语入学成绩:" << std::left << setw(3) << this->gradeOfEnglish;
 	cout << endl;
 }
-void Stu::changeInformation(int id, string name, string sex, string field, int year, int month, int day, string address, float E_grade) {
+
+void Stu::changeInformation(int id, string name, string sex, string field, int year, int month, int day, string address, float E_grade) 
+{
 	this->id = id;
 	this->name = name;
 	this->sex = sex;
@@ -45,59 +52,90 @@ void Stu::changeInformation(int id, string name, string sex, string field, int y
 	this->address = address;
 	this->gradeOfEnglish = E_grade;
 }
-void Stu::delStu() {
+
+void Stu::delStu() 
+{
 	if (this->before != nullptr) {//如果是nullptr 那就是没有元素 这是第一个元素
 		this->before->setNext(this->next);
 	}
-	else { //操作的是head
+	else 
+	{ //操作的是head
 		Stu::head = this->next;
 	}
 
-	if (this->next != nullptr) {
+	if (this->next != nullptr) 
+	{
 		this->next->setBefore(this->before);
 	}
-	else { //操作的是last
+	else 
+	{ //操作的是last
 		Stu::last = this->before;
 	}
 	delete this;
 }
-int Stu::getId() {
+
+int Stu::getId() 
+{
 	return this->id;			//获取该对象的id
 }
-string Stu::getName() {
+
+string Stu::getName() 
+{
 	return this->name;			//获取该对象的name
 }
-string Stu::getSex() {
+
+string Stu::getSex() 
+{
 	return this->sex;			//获取该对象的sex
 }
-string Stu::getField() {
+
+string Stu::getField() 
+{
 	return this->field;			//获取该对象的field
 }
-int Stu::getYear() {
+
+int Stu::getYear() 
+{
 	return this->year;			//获取该对象的year
 }
-int Stu::getMonth() {
+
+int Stu::getMonth() 
+{
 	return this->month;			//获取该对象的month
 }
-int Stu::getDay() {
+
+int Stu::getDay() 
+{
 	return this->day;			//获取该对象的day
 }
-string Stu::getAddress() {
+
+string Stu::getAddress() 
+{
 	return this->address;		//获取该对象的address
 }
-float Stu::getE_grade() {
+
+float Stu::getE_grade() 
+{
 	return this->gradeOfEnglish;//获取该对象的gradeOfEnglish
 }
-Stu* Stu::getBefore() {
+
+Stu* Stu::getBefore() 
+{
 	return this->before;
 }
-Stu* Stu::getNext() {
+
+Stu* Stu::getNext() 
+{
 	return this->next;
 }
-void Stu::setNext(Stu* item) {
+
+void Stu::setNext(Stu* item) 
+{
 	this->next = item;
 }
-void Stu::setBefore(Stu* item) {
+
+void Stu::setBefore(Stu* item) 
+{
 	this->before = item;
 }
 

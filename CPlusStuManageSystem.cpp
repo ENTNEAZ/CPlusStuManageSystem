@@ -56,6 +56,7 @@ void menu() //菜单
 
 		cout << "请输入序号：";
 		cin >> userChoice;
+
 		switch (userChoice)
 		{
 		case 0:
@@ -160,11 +161,15 @@ void add()//增加
 	}
 }
 
-bool isExist(int id, bool output) {
+bool isExist(int id, bool output) 
+{
 	Stu* item = Stu::head;
-	while (item != nullptr) {
-		if (item->getId() == id) {
-			if (output) {
+	while (item != nullptr) 
+	{
+		if (item->getId() == id) 
+		{
+			if (output) 
+			{
 				item->printStu();
 				cout << "学号已存在，请重新输入" << endl;
 			}
@@ -181,8 +186,10 @@ void del() {
 	cout << "请输入要删除学生的学号：";
 	cin >> id;
 
-	while (item != nullptr) {
-		if (item->getId() == id) {
+	while (item != nullptr) 
+	{
+		if (item->getId() == id) 
+		{
 			item->printStu();
 			item->delStu();
 			cout << "该学生信息已删除" << endl;
@@ -202,8 +209,10 @@ void change(){
 	cout << "请输入要修改学生的学号：";
 	cin >> id;
 
-	while (item != nullptr) {
-		if (item->getId() == id) {
+	while (item != nullptr) 
+	{
+		if (item->getId() == id) 
+		{
 
 			item->printStu();
 
@@ -284,7 +293,9 @@ void search()
 			item->printStu();
 			//防止重名 继续执行
 			item = item->getNext();
-		}else {
+		}
+		else 
+		{
 			item = item->getNext();
 		}
 	}
@@ -294,19 +305,23 @@ void search()
 	return;
 }
 
-void exchange(Stu* item1,Stu* item2) { // 交换两个东西
-	if (item1->getBefore() == nullptr) { //这是head
+void exchange(Stu* item1,Stu* item2) 
+{ // 交换两个东西
+	if (item1->getBefore() == nullptr) 
+	{ //这是head
 		Stu::head = item2;
 	}
-	else {
+	else 
+	{
 		item1->getBefore()->setNext(item2);
 	}
 	item2->setBefore(item1->getBefore());
 
-	if (item2->getNext() == nullptr) { //这是last啊
+	if (item2->getNext() == nullptr) { //这是last
 		Stu::last = item1;
 	}
-	else {
+	else 
+	{
 		item2->getNext()->setBefore(item1);
 	}
 	item1->setNext(item2->getNext());
@@ -315,7 +330,7 @@ void exchange(Stu* item1,Stu* item2) { // 交换两个东西
 
 }
 
-void load(bool output = false) //
+void load(bool output = false) //导入
 {
 	ifstream file;
 	string name, sex, field, address;
@@ -427,7 +442,8 @@ Stu* Stu::last = nullptr;
 Stu* Stu::head = nullptr;
 
 
-int main() {
+int main() 
+{
 	load(false);
 	menu();
 	return 0;
