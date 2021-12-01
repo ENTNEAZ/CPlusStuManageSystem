@@ -142,11 +142,12 @@
     <ClCompile Include="CPlusStuManageSystem.cpp" />
     <ClCompile Include="Edited.cpp" />
     <ClCompile Include="Original.cpp" />
+    <ClCompile Include="StuClass.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="censusAll.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="censusAll.h" />
+    <ClInclude Include="StuClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
