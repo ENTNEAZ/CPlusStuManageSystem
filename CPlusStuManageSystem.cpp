@@ -335,13 +335,9 @@ void vagueSearch()//(已支持模糊查询)
 		size_t found = item->getName().find(inputName);
 		if (found != string::npos)
 		{
-			item->printStu();
-			item = item->getNext();
+			item->printStu();	
 		}
-		else
-		{
-			item = item->getNext();
-		}
+		item = item->getNext();
 	}
 	cout << "以上是数据库内有关" << inputName << "的信息" << endl;
 	cout << endl;

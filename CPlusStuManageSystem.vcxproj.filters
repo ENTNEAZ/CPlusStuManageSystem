@@ -18,12 +18,6 @@
     <ClCompile Include="CPlusStuManageSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Original.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Edited.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
