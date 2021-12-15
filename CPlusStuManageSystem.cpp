@@ -1,4 +1,4 @@
-﻿////有新生来报到，要逐个录入其信息，
+﻿//有新生来报到，要逐个录入其信息，
 //如：学生姓名，性别，专业，出生日期，家庭地址，英语入学成绩。
 //要求设计链表来实现，并统计学生人数。文本界面为：
 //1. 新增学生信息 
@@ -21,20 +21,20 @@
 
 using namespace std;
 
-void menu();			//菜单
-void add();				//增加													//done
-void del();				//删除													//done
-void change();			//修改													//done
-void search();			//查找													//done
-void censusAll();		//学生信息统计（按专业或性别或年龄---年龄要自动计算）	//done
-void printAll(bool reverse);		//输出全部学生信息										//done
+void menu();									//菜单
+void add();										//增加													
+void del();										//删除													
+void change();									//修改													
+void search();									//查找													
+void censusAll();								//学生信息统计（按专业或性别或年龄---年龄要自动计算）	
+void printAll(bool reverse);					//输出全部学生信息							
 void sort(bool output = false);
-void load(bool output);//导入
-void save(bool output);//导出（学生信息保存）
+void load(bool output);							//导入
+void save(bool output);							//导出（学生信息保存）
 
-void screenField();		//按照专业筛选
-void screenSex();		//按照性别筛选
-void screenAge();		//按照年龄筛选
+void screenField();								//按照专业筛选
+void screenSex();								//按照性别筛选
+void screenAge();								//按照年龄筛选
 
 bool birthdayJudge(int year, int month, int day);
 bool isLeap(int year, int month, int day);
@@ -318,7 +318,7 @@ void search()
 }
 
 void exchange(Stu* item1,Stu* item2) 
-{ // 交换两个东西
+{ // 交换两个对象
 	if (item1->getBefore() == nullptr) 
 	{ //这是head
 		Stu::head = item2;
