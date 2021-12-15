@@ -25,7 +25,8 @@ void menu();									//菜单
 void add();										//增加													
 void del();										//删除													
 void change();									//修改													
-void search();									//查找													
+void search();									//查找	
+void vagueSearch();
 void censusAll();								//学生信息统计（按专业或性别或年龄---年龄要自动计算）	
 void printAll(bool reverse);					//输出全部学生信息							
 void sort(bool output = false);
@@ -78,7 +79,8 @@ void menu() //菜单
 			add();
 			break;
 		case 2:
-			search();
+			//search();
+			vagueSearch();
 			break;
 		case 3:
 			change();
@@ -287,12 +289,42 @@ void change(){
 	return;
 }
 
-void search()
+//void search()
+//{
+//	Stu* item = Stu::head;
+//	string inputName;
+//
+//	cout << "输入要查询学生的姓名:";
+//	cin >> inputName;
+//
+//	cout << "下面是数据库内有关" << inputName << "的信息" << endl;
+//	cout << endl;
+//
+//	while (item != NULL)
+//	{
+//		if (item->getName() ==  inputName)
+//		{
+//			item->printStu();
+//			//防止重名 继续执行
+//			item = item->getNext();
+//		}
+//		else 
+//		{
+//			item = item->getNext();
+//		}
+//	}
+//	cout << "以上是数据库内有关" << inputName << "的信息" << endl;
+//	cout << endl;
+//	system("pause");
+//	return;
+//}
+
+void vagueSearch()
 {
 	Stu* item = Stu::head;
 	string inputName;
 
-	cout << "输入要查询学生的姓名:";
+	cout << "请输入要查询学生的姓名(已支持模糊查询)";
 	cin >> inputName;
 
 	cout << "下面是数据库内有关" << inputName << "的信息" << endl;
@@ -300,13 +332,13 @@ void search()
 
 	while (item != NULL)
 	{
-		if (item->getName() ==  inputName)
+		size_t found = item->getName().find(inputName);
+		if (found != string::npos)
 		{
 			item->printStu();
-			//防止重名 继续执行
 			item = item->getNext();
 		}
-		else 
+		else
 		{
 			item = item->getNext();
 		}
