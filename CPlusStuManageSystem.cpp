@@ -25,8 +25,8 @@ void menu();									//菜单
 void add();										//增加													
 void del();										//删除													
 void change();									//修改													
-void search();									//查找	
-void vagueSearch();
+//void search();									//查找	
+void vagueSearch();								//查询(已支持模糊查询)
 void censusAll();								//学生信息统计（按专业或性别或年龄---年龄要自动计算）	
 void printAll(bool reverse);					//输出全部学生信息							
 void sort(bool output = false);
@@ -319,7 +319,7 @@ void change(){
 //	return;
 //}
 
-void vagueSearch()
+void vagueSearch()//(已支持模糊查询)
 {
 	Stu* item = Stu::head;
 	string inputName;
