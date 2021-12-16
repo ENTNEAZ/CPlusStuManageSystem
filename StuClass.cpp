@@ -5,6 +5,7 @@
 
 
 Stu::Stu(int id, string name, string sex, string field, int year, int month, int day, string address, float E_grade) 
+//类的构造函数
 {
 	this->id = id;
 	this->name = name;
@@ -16,9 +17,9 @@ Stu::Stu(int id, string name, string sex, string field, int year, int month, int
 	this->address = address;
 	this->gradeOfEnglish = E_grade;
 	this->before = Stu::last;
-	Stu::last = this;
-	if (this->before != nullptr) 
-	{//如果是nullptr 那就是没有元素 这是第一个元素
+	Stu::last = this;//尾指针后移
+	if (this->before != nullptr) //如果是nullptr 那就是没有元素 这是第一个元素
+	{
 		this->before->setNext(this);
 	}
 	else 
@@ -29,6 +30,7 @@ Stu::Stu(int id, string name, string sex, string field, int year, int month, int
 }
 
 void Stu::printStu() 
+//输出该对象的信息
 {
 	cout << "学号:" << std::left << setw(12) << this->id;
 	cout << "姓名:" << std::left << setw(10) << this->name;
@@ -41,6 +43,7 @@ void Stu::printStu()
 }
 
 void Stu::changeInformation(int id, string name, string sex, string field, int year, int month, int day, string address, float E_grade) 
+//修改该对象的信息
 {
 	this->id = id;
 	this->name = name;
@@ -54,12 +57,13 @@ void Stu::changeInformation(int id, string name, string sex, string field, int y
 }
 
 void Stu::delStu() 
+//删除该对象
 {
 	if (this->before != nullptr) {//如果是nullptr 那就是没有元素 这是第一个元素
 		this->before->setNext(this->next);
 	}
-	else 
-	{ //操作的是head
+	else //操作的是head
+	{ 
 		Stu::head = this->next;
 	}
 
@@ -67,8 +71,8 @@ void Stu::delStu()
 	{
 		this->next->setBefore(this->before);
 	}
-	else 
-	{ //操作的是last
+	else //操作的是last
+	{ 
 		Stu::last = this->before;
 	}
 	delete this;
@@ -121,21 +125,21 @@ float Stu::getE_grade()
 
 Stu* Stu::getBefore() 
 {
-	return this->before;
+	return this->before;		//获取该对象的前指针
 }
 
 Stu* Stu::getNext() 
 {
-	return this->next;
+	return this->next;			//获取该对象的后指针
 }
 
 void Stu::setNext(Stu* item) 
 {
-	this->next = item;
+	this->next = item;			//设置该对象的后指针
 }
 
 void Stu::setBefore(Stu* item) 
 {
-	this->before = item;
+	this->before = item;		//设置该对象的前指针
 }
 

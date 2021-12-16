@@ -10,6 +10,33 @@
 //7. 学生信息保存
 //8. 退出
 
+//函数分布
+ 
+//main()
+//		load()							默认自动导入信息 
+//		menu()							进入菜单 	
+//			0.	load()					手动导入信息 
+//			1.	add()					新增 
+//					isExist()			查重 
+//					birthdayJudge()		出生日期判断 
+//						isLeap()		闰年判断 
+//			2.	vagueSearch()			查询(支持模糊查询) 
+//			3.	change()				修改		
+//					birthdayJudge()		出生日期判断 
+//						isLeap()		闰年判断 
+//			4.	del()					删除 
+//					printStu()			打印学生信息
+//			5.	censusAll()				信息统计（包含筛选打印和全部打印）
+//					screenField()		按照指定专业打印信息
+//						printStu() 		打印学生信息
+//					screenSex()			按照指定性别打印信息
+//						printStu() 		打印学生信息
+//					screenAge()			按照指定年龄打印信息（年龄根据该学生信息中的年份自动计算）
+//						printStu() 		打印学生信息
+//			6.	sort()					按照英语成绩排序（采用冒泡循环）
+//			7.	save()					将链表信息存入文件
+//			8.	save()
+//				return					将链表信息存入文件后返回主函数，结束程序 
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -22,11 +49,13 @@
 using namespace std;
 
 void menu();									//菜单
-void add();										//增加													
-void del();										//删除													
-void change();									//修改													
-//void search();									//查找	
+void add();										//增加		
 void vagueSearch();								//查询(已支持模糊查询)
+void change();									//修改	
+void del();										//删除													
+												
+//void search();									//查找	
+
 void censusAll();								//学生信息统计（按专业或性别或年龄---年龄要自动计算）	
 void printAll(bool reverse);					//输出全部学生信息							
 void sort(bool output = false);
@@ -36,6 +65,7 @@ void save(bool output);							//导出（学生信息保存）
 void screenField();								//按照专业筛选
 void screenSex();								//按照性别筛选
 void screenAge();								//按照年龄筛选
+void exchange(Stu* item1, Stu* item2);			//交换对象
 
 bool birthdayJudge(int year, int month, int day);
 bool isLeap(int year, int month, int day);
@@ -53,10 +83,10 @@ void menu() //菜单
 		cout << endl;
 		cout << "0.导入学生信息（默认已自动导入）" << endl;
 		cout << "1.新增学生信息 " << endl;
-		cout << "2.查询学生信息 " << endl;
+		cout << "2.查询学生信息 (已支持模糊查询)" << endl;
 		cout << "3.修改学生信息 " << endl;
 		cout << "4.删除学生信息 " << endl;
-		cout << "5.学生信息统计 " << endl;
+		cout << "5.学生信息统计(内含按照专业、性别、年龄分类)" << endl;
 		cout << "6.学生成绩排序 " << endl;
 		cout << "7.学生信息总览 " << endl;
 		cout << "8.学生信息储存 " << endl;
@@ -79,7 +109,6 @@ void menu() //菜单
 			add();
 			break;
 		case 2:
-			//search();
 			vagueSearch();
 			break;
 		case 3:
@@ -194,6 +223,33 @@ bool isExist(int id, bool output)
 	return false;
 }
 
+void vagueSearch()//(已支持模糊查询)
+{
+	Stu* item = Stu::head;
+	string inputName;
+
+	cout << "请输入要查询学生的姓名(已支持模糊查询)";
+	cin >> inputName;
+
+	cout << "下面是数据库内有关" << inputName << "的信息" << endl;
+	cout << endl;
+
+	while (item != NULL)
+	{
+		size_t found = item->getName().find(inputName);
+		if (found != string::npos)
+		{
+			item->printStu();	
+		}
+		item = item->getNext();
+	}
+	cout << "以上是数据库内有关" << inputName << "的信息" << endl;
+	cout << endl;
+	system("pause");
+	return;
+}
+
+
 void del() {
 	int id;
 	Stu* item = Stu::head;
@@ -289,86 +345,7 @@ void change(){
 	return;
 }
 
-//void search()
-//{
-//	Stu* item = Stu::head;
-//	string inputName;
-//
-//	cout << "输入要查询学生的姓名:";
-//	cin >> inputName;
-//
-//	cout << "下面是数据库内有关" << inputName << "的信息" << endl;
-//	cout << endl;
-//
-//	while (item != NULL)
-//	{
-//		if (item->getName() ==  inputName)
-//		{
-//			item->printStu();
-//			//防止重名 继续执行
-//			item = item->getNext();
-//		}
-//		else 
-//		{
-//			item = item->getNext();
-//		}
-//	}
-//	cout << "以上是数据库内有关" << inputName << "的信息" << endl;
-//	cout << endl;
-//	system("pause");
-//	return;
-//}
 
-void vagueSearch()//(已支持模糊查询)
-{
-	Stu* item = Stu::head;
-	string inputName;
-
-	cout << "请输入要查询学生的姓名(已支持模糊查询)";
-	cin >> inputName;
-
-	cout << "下面是数据库内有关" << inputName << "的信息" << endl;
-	cout << endl;
-
-	while (item != NULL)
-	{
-		size_t found = item->getName().find(inputName);
-		if (found != string::npos)
-		{
-			item->printStu();	
-		}
-		item = item->getNext();
-	}
-	cout << "以上是数据库内有关" << inputName << "的信息" << endl;
-	cout << endl;
-	system("pause");
-	return;
-}
-
-void exchange(Stu* item1,Stu* item2) 
-{ // 交换两个对象
-	if (item1->getBefore() == nullptr) 
-	{ //这是head
-		Stu::head = item2;
-	}
-	else 
-	{
-		item1->getBefore()->setNext(item2);
-	}
-	item2->setBefore(item1->getBefore());
-
-	if (item2->getNext() == nullptr) { //这是last
-		Stu::last = item1;
-	}
-	else 
-	{
-		item2->getNext()->setBefore(item1);
-	}
-	item1->setNext(item2->getNext());
-	item2->setNext(item1);
-	item1->setBefore(item2);
-
-}
 
 void load(bool output = false) //导入
 {
@@ -477,6 +454,32 @@ void sort(bool output)
 	return;
 }
 
+void exchange(Stu* item1,Stu* item2)// 交换两个对象
+{ 
+	if (item1->getBefore() == nullptr)//这是head 
+	{ 
+		Stu::head = item2;
+	}
+	else//不是head
+	{
+		item1->getBefore()->setNext(item2);
+	}
+	item2->setBefore(item1->getBefore());
+
+	if (item2->getNext() == nullptr)//这是last
+	{ 
+		Stu::last = item1;
+	}
+	else//不是last
+	{
+		item2->getNext()->setBefore(item1);
+	}
+
+	item1->setNext(item2->getNext());
+	item2->setNext(item1);
+	item1->setBefore(item2);
+
+}
 	
 Stu* Stu::last = nullptr;
 Stu* Stu::head = nullptr;
