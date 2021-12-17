@@ -344,7 +344,7 @@ Stu* Stu::head = nullptr;
 
 int main() 
 {
-	system("color F0");
+	//system("color F0");
 	load(false);
 	menu();
 	return 0;
