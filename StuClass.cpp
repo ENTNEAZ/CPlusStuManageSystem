@@ -40,6 +40,7 @@ void Stu::printStu()
 	cout << "家庭地址:" << std::left << setw(24) << this->address;
 	cout << "英语入学成绩:" << std::left << setw(3) << this->gradeOfEnglish;
 	cout << endl;
+	cout << endl;
 }
 
 void Stu::changeInformation(int id, string name, string sex, string field, int year, int month, int day, string address, float E_grade) 
