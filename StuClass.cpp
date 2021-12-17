@@ -141,4 +141,3 @@ void Stu::setBefore(Stu* item)
 {
 	this->before = item;		//设置该对象的前指针
 }
-

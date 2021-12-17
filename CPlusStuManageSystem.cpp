@@ -26,16 +26,16 @@
 //					printStu()				类_打印
 //			2.	search()					查询(支持模糊查询)
 //					search_Id()				按照学号查询
-//						getId()				类_获取学号
+//						getId()				类_获取“学号”
 //						printStu()			类_打印
 //						getNext()			类_获取后指针(目的在于指针后移)
 //					search_Name()			按照姓名查询
-//						getName()			类_获取姓名
+//						getName()			类_获取“姓名”
 //						printStu()			类_打印
 //						getNext()			类_获取后指针(目的在于指针后移)
 //			3.	change()					修改
 //					changeStu_Id()			搜寻学号修改
-//						getId()				类_获取学号
+//						getId()				类_获取“学号”
 //						printStu()			类_打印
 //						birthdayJudge()		出生日期格式判断
 //							isLeap()		闰年判断
@@ -44,7 +44,7 @@
 //						printStu()			类_打印
 //						getNext()			类_获取后指针(目的在于指针后移)
 //					changeStu_Name()		搜寻姓名修改
-//						getName()			类_获取姓名
+//						getName()			类_获取“姓名”
 //						printStu()			类_打印
 //						birthdayJudge()		出生日期格式判断
 //							isLeap()		闰年判断
@@ -57,13 +57,46 @@
 //						sexJudge()			性别格式判断 
 //			4.	del()						删除 
 //					delStu_Id()				搜寻学号删除
+//						getId()				类_获取“学号”
+//						printStu()			类_打印
+//						delStu()			类_删除
+//							setNext()		类_设置后指针
+//							setBefore()		类_设置前指针
+//						getNext()			类_获取后指针(目的在于指针后移)
 //					delStu_Name()			搜寻姓名删除
+//						getName()			类_获取“姓名”
+//						printStu()			类_打印
+//						delStu()			类_删除
+//							setNext()		类_设置后指针
+//							setBefore()		类_设置前指针
+//						getNext()			类_获取后指针(目的在于指针后移)
 //			5.	censusAll()					信息统计（包含筛选打印和全部打印）
 //					screenField()			按照指定专业筛选信息
+//						getField()			类_获取“专业”
+//						printStu()			类_打印
+//						getNext()			类_获取后指针(目的在于指针后移)
 //					screenSex()				按照指定性别筛选信息
+//						getSex()			类_获取“性别”
+//						printStu()			类_打印
+//						getNext()			类_获取后指针(目的在于指针后移)
 //					screenAge()				按照指定年龄筛选信息（年龄根据该学生信息中的年份自动计算）
+//						getAge()			类_获取“年龄”
+//						printStu()			类_打印
+//						getNext()			类_获取后指针(目的在于指针后移)
+//					printAll()				输出全部学生信息
+//						printStu()			类_打印
+//						getNext()			类_获取后指针(目的在于指针后移)
+//			6.  printAll()					输出全部学生信息
+//					printStu()				类_打印
+//					getNext()				类_获取后指针(目的在于指针后移)
 //			6.	sort()						按照英语成绩排序（采用冒泡循环）
+//					getNext()				类_获取后指针
+//					getE_grade()			类_获取“英语成绩”
 //					exchange()				交换两个对象
+//						getBefore()
+//						getNext()
+//					getNext()
+//					getBefore()
 //			7.	save()						将链表信息存入文件
 //			8.	save()
 //				return						将链表信息存入文件后返回主函数，结束程序 
@@ -113,21 +146,25 @@ void menu() //菜单
 		system("cls");//清屏
 		cout << "----------------------------学生基本信息管理系统----------------------------" << endl;
 		cout << endl;
-		cout << "0.导入学生信息（默认已自动导入）" << endl;
-		cout << "1.新增学生信息 " << endl;
-		cout << "2.查询学生信息 (已支持模糊查询)" << endl;
-		cout << "3.修改学生信息 " << endl;
-		cout << "4.删除学生信息 " << endl;
-		cout << "5.学生信息统计菜单" << endl;
-		cout << "6.学生成绩排序 " << endl;
-		cout << "7.学生信息总览 " << endl;
-		cout << "8.学生信息储存 " << endl;
-		cout << "9.保存并安全退出" << endl;
+		cout << "\t\t\t    0.导入学生信息（默认已自动导入）" << endl;
+		cout << "\t\t\t    1.新增学生信息 " << endl;
+		cout << "\t\t\t    2.查询学生信息 " << endl;
+		cout << "\t\t\t    3.修改学生信息 " << endl;
+		cout << "\t\t\t    4.删除学生信息 " << endl;
+		cout << "\t\t\t    5.学生信息统计菜单" << endl;
+		cout << "\t\t\t    6.学生成绩排序 " << endl;
+		cout << "\t\t\t    7.学生信息总览 " << endl;
+		cout << "\t\t\t    8.学生信息储存 " << endl;
+		cout << "\t\t\t    9.保存并安全退出" << endl;
 		cout << endl;
+		cout << endl;
+		cout << "-----------------------------------------------------------------------------" << endl;
 		cout << endl;
 		cout << "使用注意事项" << endl;
 		cout << "进行“增加”、“修改”、“删除”操作后，务必将信息储存，否则不会保存在文件内！" << endl;
+		cout << endl;
 		cout << "-----------------------------------------------------------------------------" << endl;
+		cout << endl;
 		
 		int userChoice;
 		cout << "请输入序号：";

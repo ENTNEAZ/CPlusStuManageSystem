@@ -5,4 +5,6 @@
 #include <fstream>
 #include "StuClass.h"
 
-using namespace std;
+void search();
+void search_Id();
+void search_Name();
