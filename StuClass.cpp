@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "StuClass.h"
 
+using namespace std;
 
 Stu::Stu(int id, string name, string sex, string field, int year, int month, int day, string address, float E_grade) 
 //类的构造函数
