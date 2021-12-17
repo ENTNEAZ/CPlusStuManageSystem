@@ -1,9 +1,8 @@
 #pragma once
 #include <iostream>
-#include <ctime>
-#include <string>
+
 #include "StuClass.h"
 
-void change();
-void changeStu_Id();
-void changeStu_Name();
+void change();				//修改
+void changeStu_Id();		//按照所查学号修改
+void changeStu_Name();		//按照所查姓名修改

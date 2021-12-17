@@ -25,7 +25,7 @@ using namespace std;
 
 void menu();									//菜单
 void add();										//1.增加		
-void search();								//2.查询(已支持模糊查询)
+void search();									//2.查询(已支持模糊查询)
 void change();									//3.修改	
 void del();										//4.删除													
 void censusAll();								//5.学生信息统计（按专业或性别或年龄---年龄要自动计算）	
@@ -43,10 +43,10 @@ void screenSex();								//按照性别筛选
 void screenAge();								//按照年龄筛选
 void exchange(Stu* item1, Stu* item2);			//交换对象
 
-bool birthdayJudge(int year, int month, int day);
-bool isLeap(int year, int month, int day);
-bool sexJudge(std::string sex);
-bool isExist(int id, bool output);
+bool birthdayJudge(int year, int month, int day);	//判断出生日期格式
+bool isLeap(int year, int month, int day);			//判断是否为闰年
+bool sexJudge(std::string sex);						//判断性别格式
+bool isExist(int id, bool output);					//判断是否已存在
 
 void menu() //菜单
 {

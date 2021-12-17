@@ -1,10 +1,8 @@
 #pragma once
 #include <iostream>
-#include <string>
-#include <iomanip>
-#include <fstream>
+
 #include "StuClass.h"
 
-void search();
-void search_Id();
-void search_Name();
+void search();				//²éÑ¯
+void search_Id();			//Ñ§ºÅ¼ìË÷
+void search_Name();			//ĞÕÃû¼ìË÷

@@ -1,9 +1,8 @@
 #pragma once
 #include <iostream>
-#include <ctime>
-#include <string>
+
 #include "StuClass.h"
 
-void del();
-void delStu_Id();
-void delStu_Name();
+void del();					//删除
+void delStu_Id();			//按照所查学号删除
+void delStu_Name();			//按照所查姓名删除
