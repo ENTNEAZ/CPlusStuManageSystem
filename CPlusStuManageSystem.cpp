@@ -13,6 +13,7 @@
 #include <string>
 #include <iomanip>
 #include <fstream>
+#include <stdlib.h>
 
 #include "StuClass.h"
 #include "censusAll.h"
@@ -343,6 +344,7 @@ Stu* Stu::head = nullptr;
 
 int main() 
 {
+	system("color F0");
 	load(false);
 	menu();
 	return 0;
