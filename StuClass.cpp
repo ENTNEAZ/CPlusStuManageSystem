@@ -21,7 +21,7 @@ Stu::Stu(int id, string name, string sex, string field, int year, int month, int
 	{
 		this->before->setNext(this);
 	}
-	else 
+	else //第一个元素
 	{
 		Stu::head = this;
 	}
@@ -77,6 +77,16 @@ void Stu::delStu()
 	delete this;
 }
 
+void Stu::setNext(Stu* item) 
+{
+	this->next = item;			//设置该对象的后指针
+}
+
+void Stu::setBefore(Stu* item) 
+{
+	this->before = item;		//设置该对象的前指针
+}
+
 int Stu::getId() 
 {
 	return this->id;			//获取该对象的id
@@ -130,14 +140,4 @@ Stu* Stu::getBefore()
 Stu* Stu::getNext() 
 {
 	return this->next;			//获取该对象的后指针
-}
-
-void Stu::setNext(Stu* item) 
-{
-	this->next = item;			//设置该对象的后指针
-}
-
-void Stu::setBefore(Stu* item) 
-{
-	this->before = item;		//设置该对象的前指针
 }

@@ -89,7 +89,7 @@
 //			6.  printAll()					输出全部学生信息
 //					printStu()				类_打印
 //					getNext()				类_获取后指针(目的在于指针后移)
-//			6.	sort()						按照英语成绩排序（采用冒泡循环）
+//			7.	sort()						按照英语成绩排序（采用冒泡循环）
 //					getNext()				类_获取后指针
 //					getE_grade()			类_获取“英语成绩”
 //					exchange()				交换两个对象
@@ -97,8 +97,28 @@
 //						getNext()
 //					getNext()
 //					getBefore()
-//			7.	save()						将链表信息存入文件
-//			8.	save()
+//			8.	save()						将链表信息存入文件
+//					getId()					类_获取“学号”
+//					getName()				类_获取“姓名”
+//					getSex()				类_获取“性别”
+//					getField()				类_获取“专业”
+//					getYear()				类_获取“年”
+//					getMonth()				类_获取“月”
+//					getDay()				类_获取“日”
+//					getAddress()			类_获取“家庭地址”
+//					getE_grade()			类_获取“英语成绩”
+//					getNext()				类_获取后指针(目的在于指针后移)
+//			9.	save()
+//					getId()					类_获取“学号”
+//					getName()				类_获取“姓名”
+//					getSex()				类_获取“性别”
+//					getField()				类_获取“专业”
+//					getYear()				类_获取“年”
+//					getMonth()				类_获取“月”
+//					getDay()				类_获取“日”
+//					getAddress()			类_获取“家庭地址”
+//					getE_grade()			类_获取“英语成绩”
+//					getNext()				类_获取后指针(目的在于指针后移)
 //				return						将链表信息存入文件后返回主函数，结束程序 
 #include <iostream>
 #include <string>
