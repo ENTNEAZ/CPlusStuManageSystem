@@ -27,9 +27,27 @@
     <ClCompile Include="StuClass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="del.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="change.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StuClass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="del.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="change.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="censusAll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
