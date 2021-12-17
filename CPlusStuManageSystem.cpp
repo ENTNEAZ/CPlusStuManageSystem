@@ -13,27 +13,60 @@
 //函数分布
  
 //main()
-//		load()							默认自动导入信息 
-//		menu()							进入菜单 	
-//			0.	load()					手动导入信息 
-//			1.	add()					新增 
-//					isExist()			查重 
-//					birthdayJudge()		出生日期判断 
-//						isLeap()		闰年判断 
-//			2.	vagueSearch()			查询(支持模糊查询) 
-//			3.	change()				修改		
-//					birthdayJudge()		出生日期判断 
-//						isLeap()		闰年判断 
-//			4.	del()					删除 
-//			5.	censusAll()				信息统计（包含筛选打印和全部打印）
-//					screenField()		按照指定专业筛选信息
-//					screenSex()			按照指定性别筛选信息
-//					screenAge()			按照指定年龄筛选信息（年龄根据该学生信息中的年份自动计算）
-//			6.	sort()					按照英语成绩排序（采用冒泡循环）
-//					exchange()			交换两个对象
-//			7.	save()					将链表信息存入文件
+//		load()								导入信息 
+//		menu()								进入菜单 	
+//			0.	load()						导入信息 
+//			1.	add()						新增 
+//					isExist()				查重 
+//					birthdayJudge()			出生日期格式判断 
+//						isLeap()			闰年判断 
+//					sexJudge()				性别格式判断
+//					Stu()					类_构造函数
+//						setNext()			类设置后指针
+//					printStu()				类_打印
+//			2.	search()					查询(支持模糊查询)
+//					search_Id()				按照学号查询
+//						getId()				类_获取学号
+//						printStu()			类_打印
+//						getNext()			类_获取后指针(目的在于指针后移)
+//					search_Name()			按照姓名查询
+//						getName()			类_获取姓名
+//						printStu()			类_打印
+//						getNext()			类_获取后指针(目的在于指针后移)
+//			3.	change()					修改
+//					changeStu_Id()			搜寻学号修改
+//						getId()				类_获取学号
+//						printStu()			类_打印
+//						birthdayJudge()		出生日期格式判断
+//							isLeap()		闰年判断
+//						sexJudge()			性别格式判断
+//						changeInformation()	类_修改信息
+//						printStu()			类_打印
+//						getNext()			类_获取后指针(目的在于指针后移)
+//					changeStu_Name()		搜寻姓名修改
+//						getName()			类_获取姓名
+//						printStu()			类_打印
+//						birthdayJudge()		出生日期格式判断
+//							isLeap()		闰年判断
+//						sexJudge()			性别格式判断
+//						changeInformation()	类_修改信息
+//						printStu()			类_打印
+//						getNext()			类_获取后指针(目的在于指针后移)
+//						birthdayJudge()		出生日期格式判断 
+//							isLeap()		闰年判断
+//						sexJudge()			性别格式判断 
+//			4.	del()						删除 
+//					delStu_Id()				搜寻学号删除
+//					delStu_Name()			搜寻姓名删除
+//			5.	censusAll()					信息统计（包含筛选打印和全部打印）
+//					screenField()			按照指定专业筛选信息
+//					screenSex()				按照指定性别筛选信息
+//					screenAge()				按照指定年龄筛选信息（年龄根据该学生信息中的年份自动计算）
+//			6.	sort()						按照英语成绩排序（采用冒泡循环）
+//					exchange()				交换两个对象
+//			7.	save()						将链表信息存入文件
 //			8.	save()
-//				return					将链表信息存入文件后返回主函数，结束程序 
+//				return						将链表信息存入文件后返回主函数，结束程序 
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -44,12 +77,13 @@
 #include "change.h"
 #include "del.h"
 #include "Utils.h"
+#include "search.h"
 
 using namespace std;
 
 void menu();									//菜单
 void add();										//1.增加		
-void vagueSearch();								//2.查询(已支持模糊查询)
+void search();								//2.查询(已支持模糊查询)
 void change();									//3.修改	
 void del();										//4.删除													
 void censusAll();								//5.学生信息统计（按专业或性别或年龄---年龄要自动计算）	
@@ -108,7 +142,7 @@ void menu() //菜单
 			add();
 			break;
 		case 2:
-			vagueSearch();
+			search();
 			break;
 		case 3:
 			change();
@@ -153,7 +187,7 @@ void add()//增加
 	}
 	else
 	{
-		char name[15], sex[5], field[30], address[100];
+		string name, sex, field, address;
 		float E_grade;
 		int year, month, day;
 
@@ -194,9 +228,11 @@ void add()//增加
 			system("pause");
 			return;
 		}
-
+		cout << endl;
 		Stu* toAdd = nullptr;
 		toAdd = new Stu(id, name, sex, field, year, month, day, address, E_grade);
+		toAdd->printStu();
+
 		cout << "添加成功" << endl;
 		system("pause");
 		return;
@@ -220,32 +256,6 @@ bool isExist(int id, bool output)
 		item = item->getNext();
 	}
 	return false;
-}
-
-void vagueSearch()//(已支持模糊查询)
-{
-	Stu* item = Stu::head;
-	string inputName;
-
-	cout << "请输入要查询学生的姓名(已支持模糊查询)";
-	cin >> inputName;
-
-	cout << "下面是数据库内有关" << inputName << "的信息" << endl;
-	cout << endl;
-
-	while (item != NULL)
-	{
-		size_t found = item->getName().find(inputName);
-		if (found != string::npos)
-		{
-			item->printStu();	
-		}
-		item = item->getNext();
-	}
-	cout << "以上是数据库内有关" << inputName << "的信息" << endl;
-	cout << endl;
-	system("pause");
-	return;
 }
 
 void load(bool output = false) //导入

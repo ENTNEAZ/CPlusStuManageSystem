@@ -145,6 +145,7 @@
     <ClCompile Include="censusAll.cpp" />
     <ClCompile Include="del.cpp" />
     <ClCompile Include="change.cpp" />
+    <ClCompile Include="search.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StuClass.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="change.h" />
     <ClInclude Include="censusAll.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="search.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
