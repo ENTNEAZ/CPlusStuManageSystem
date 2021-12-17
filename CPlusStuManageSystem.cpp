@@ -34,6 +34,7 @@
 //					screenAge()			按照指定年龄打印信息（年龄根据该学生信息中的年份自动计算）
 //						printStu() 		打印学生信息
 //			6.	sort()					按照英语成绩排序（采用冒泡循环）
+//					exchange()			交换两个对象
 //			7.	save()					将链表信息存入文件
 //			8.	save()
 //				return					将链表信息存入文件后返回主函数，结束程序 
@@ -49,19 +50,20 @@
 using namespace std;
 
 void menu();									//菜单
-void add();										//增加		
-void vagueSearch();								//查询(已支持模糊查询)
-void change();									//修改	
-void del();										//删除													
-												
-//void search();									//查找	
+void add();										//1.增加		
+void vagueSearch();								//2.查询(已支持模糊查询)
+void change();									//3.修改	
+void del();										//4.删除													
+void censusAll();								//5.学生信息统计（按专业或性别或年龄---年龄要自动计算）	
+void printAll(bool reverse);					//6.输出全部学生信息							
+void sort(bool output = false);					//7.排序(按照英语成绩排序)
+void load(bool output);							//8.导入
+void save(bool output);							//9.导出（学生信息保存）
 
-void censusAll();								//学生信息统计（按专业或性别或年龄---年龄要自动计算）	
-void printAll(bool reverse);					//输出全部学生信息							
-void sort(bool output = false);
-void load(bool output);							//导入
-void save(bool output);							//导出（学生信息保存）
-
+void ChangeStu_Id();							//通过查询学生学号修改学生信息
+void ChangeStu_Name();							//通过查询学生姓名修改学生信息
+void DelStu_Id();								//通过查询学生学号删除学生信息
+void DelStu_Name();								//通过查询学生姓名删除学生信息
 void screenField();								//按照专业筛选
 void screenSex();								//按照性别筛选
 void screenAge();								//按照年龄筛选
@@ -74,8 +76,6 @@ bool isExist(int id, bool output);
 
 void menu() //菜单
 {
-	int userChoice;
-
 	while (true)
 	{
 		system("cls");//清屏
@@ -86,7 +86,7 @@ void menu() //菜单
 		cout << "2.查询学生信息 (已支持模糊查询)" << endl;
 		cout << "3.修改学生信息 " << endl;
 		cout << "4.删除学生信息 " << endl;
-		cout << "5.学生信息统计(内含按照专业、性别、年龄分类)" << endl;
+		cout << "5.学生信息统计菜单" << endl;
 		cout << "6.学生成绩排序 " << endl;
 		cout << "7.学生信息总览 " << endl;
 		cout << "8.学生信息储存 " << endl;
@@ -96,7 +96,8 @@ void menu() //菜单
 		cout << "使用注意事项" << endl;
 		cout << "进行“增加”、“修改”、“删除”操作后，务必将信息储存，否则不会保存在文件内！" << endl;
 		cout << "-----------------------------------------------------------------------------" << endl;
-
+		
+		int userChoice;
 		cout << "请输入序号：";
 		cin >> userChoice;
 
@@ -250,9 +251,43 @@ void vagueSearch()//(已支持模糊查询)
 }
 
 
-void del() {
-	int id;
+void del() 
+{
+	cout << "----------------------------删除界面----------------------------" << endl;
+	cout << endl;
+	cout << endl;
+	cout << "搜寻学号删除输入  1" << endl;
+	cout << "搜寻姓名删除输入  2" << endl;
+	cout << endl;
+	cout << "回到主菜单输入    3" << endl;
+	cout << endl;
+	cout << endl;
+	cout << "----------------------------------------------------------------" << endl;
+
+	int userChoice;
+	cout << "输入选择： " << endl;
+	cin >> userChoice;
+	switch (userChoice)
+	{
+	case 1:
+		DelStu_Id();
+		break;
+	case 2:
+		DelStu_Name();
+		break;
+	case 3:
+		return;
+		break;
+	default:
+		cout << "输入有误，重新输入" << endl;
+		system("pause");
+	}
+}
+
+void DelStu_Id()
+{
 	Stu* item = Stu::head;
+	int id;
 	cout << "请输入要删除学生的学号：";
 	cin >> id;
 
@@ -273,7 +308,66 @@ void del() {
 	return;
 }
 
-void change(){
+void DelStu_Name()
+{
+	Stu* item = Stu::head;
+	string iname;
+	cout << "请输入要删除学生的姓名：";
+	cin >> iname;
+
+	while (item != nullptr) 
+	{
+		if (item->getName() == iname) 
+		{
+			item->printStu();
+			item->delStu();
+			cout << "该学生信息已删除" << endl;
+			system("pause");
+			return;
+		}
+		item = item->getNext();
+	}
+	cout << "姓名不存在！返回至菜单:" << endl;
+	system("pause");
+	return;
+}
+
+void change()
+{
+	cout << "----------------------------删除界面----------------------------" << endl;
+	cout << endl;
+	cout << endl;
+	cout << "搜寻学号修改输入  1" << endl;
+	cout << "搜寻姓名修改输入  2" << endl;
+	cout << endl;
+	cout << "回到主菜单输入    3" << endl;
+	cout << endl;
+	cout << endl;
+	cout << "----------------------------------------------------------------" << endl;
+
+	int userChoice;
+	cout << "输入选择： " << endl;
+	cin >> userChoice;
+	switch (userChoice)
+	{
+	case 1:
+		ChangeStu_Id();
+		break;
+	case 2:
+		ChangeStu_Name();
+		break;
+	case 3:
+		return;
+		break;
+	default:
+		cout << "输入有误，重新输入" << endl;
+		system("pause");
+	}
+	
+}
+
+void ChangeStu_Id()
+{
 	int id;
 	Stu* item = Stu::head;
 	cout << "请输入要修改学生的学号：";
@@ -288,9 +382,12 @@ void change(){
 
 			char name[15], sex[5], field[30], address[100];
 			float E_grade;
-			int year, month, day;
+			int id,year, month, day;
 
 			cout << "开始修改" << endl;
+
+			cout << "输入学号 ";
+			cin >> id;
 
 			cout << "输入姓名: ";
 			cin >> name;
@@ -345,6 +442,81 @@ void change(){
 	return;
 }
 
+void ChangeStu_Name()
+{
+	string name;
+	Stu* item = Stu::head;
+	cout << "请输入要修改学生的姓名：";
+	cin >> name;
+
+	while (item != nullptr)
+	{
+		if (item->getName() == name)
+		{
+
+			item->printStu();
+
+			string name, sex, field, address;
+			float E_grade;
+			int id,year, month, day;
+
+			cout << "开始修改" << endl;
+
+			cout << "输入学号 ";
+			cin >> id;
+
+			cout << "输入姓名: ";
+			cin >> name;
+
+			cout << "输入性别: ";
+			cin >> sex;
+
+			cout << "输入专业: ";
+			cin >> field;
+
+			cout << "请输入出生年份: ";
+			cin >> year;
+
+			cout << "请输入出生月份: ";
+			cin >> month;
+
+			cout << "请输入出生日期: ";
+			cin >> day;
+
+			cout << "输入家庭地址: ";
+			cin >> address;
+
+			cout << "输入英语入学成绩：";
+			cin >> E_grade;
+
+			if (!birthdayJudge(year, month, day))
+			{
+				cout << "日期输入有误，返回至菜单" << endl;
+				system("pause");
+				return;
+			}
+
+			if (!sexJudge(sex))
+			{
+				cout << "性别输入不符实际，返回至菜单" << endl;
+				system("pause");
+				return;
+			}
+
+			item->changeInformation(id, name, sex, field, year, month, day, address, E_grade);
+			cout << endl;
+			cout << "该学生信息已修改" << endl;
+			cout << endl;
+			item->printStu();
+			system("pause");
+			return;
+		}
+		item = item->getNext();
+	}
+	cout << "学号不存在！返回至菜单:" << endl;
+	system("pause");
+	return;
+}
 
 
 void load(bool output = false) //导入
@@ -483,7 +655,6 @@ void exchange(Stu* item1,Stu* item2)// 交换两个对象
 	
 Stu* Stu::last = nullptr;
 Stu* Stu::head = nullptr;
-
 
 int main() 
 {
