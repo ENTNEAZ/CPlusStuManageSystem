@@ -48,7 +48,7 @@ void search_Id()
 	Stu* item = Stu::head;
 
 	int inputId;
-	cout << "请输入要查询学生的姓名(已支持模糊查询)";
+	cout << "请输入要查询学生的学号";
 	cin >> inputId;
 
 	cout << "下面是数据库内有关" << inputId << "的信息" << endl;
