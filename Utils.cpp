@@ -4,7 +4,7 @@
 
 bool birthdayJudge(int year, int month, int day);
 bool isLeap(int year, int month, int day);
-bool sexJudge(std::string sex);
+bool sexJudge(string sex);
 
 bool birthdayJudge(int year, int month, int day)
 {

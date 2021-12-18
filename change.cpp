@@ -12,6 +12,7 @@ void changeStu_Name();
 
 void change()
 {
+	system("cls");
 	cout << "----------------------------修改界面----------------------------" << endl;
 	cout << endl;
 	cout << endl;
@@ -26,6 +27,8 @@ void change()
 	int userChoice;
 	cout << "输入选择： " << endl;
 	cin >> userChoice;
+
+	cout << endl;
 	switch (userChoice)
 	{
 	case 1:
@@ -48,11 +51,12 @@ void change()
 void changeStu_Id()
 {
 	Stu* item = Stu::head;
-
 	int id;
+
 	cout << "请输入要修改学生的学号：";
 	cin >> id;
 
+	cout << endl;
 	while (item != nullptr)
 	{
 		if (item->getId() == id)
@@ -125,11 +129,12 @@ void changeStu_Id()
 void changeStu_Name()
 {
 	Stu* item = Stu::head;
-
 	string name;
+
 	cout << "请输入要修改学生的姓名：";
 	cin >> name;
 
+	cout << endl;
 	while (item != nullptr)
 	{
 		if (item->getName() == name)

@@ -2,6 +2,7 @@
 #include <ctime>
 #include <string>
 #include "StuClass.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -70,7 +71,7 @@ void screenField()
 	cout << "请输入要筛选出的专业：" << endl;
 	cin >> findField;
 
-	cout << endl << "以下是数据库中的信息：" << endl;
+	cout << endl << "以下是数据库中的信息：" << endl << endl;
 
 	while (item != NULL)
 	{
@@ -98,7 +99,14 @@ void screenSex()//按照性别筛选出符合条件的学生
 	cout << "请输入要筛选出的性别：" << endl;
 	cin >> findSex;
 
-	cout << endl << "以下是数据库中的信息：" << endl;
+	if (!sexJudge(findSex))
+	{
+		cout << "性别输入不符实际，返回至菜单" << endl;
+		system("pause");
+		return;
+	}
+
+	cout << endl << "以下是数据库中的信息：" << endl << endl;
 
 	while (item != NULL)
 	{
@@ -129,7 +137,7 @@ void screenAge()
 	cout << "请输入要筛选出的年龄：";
 	cin >> findAge;
 
-	cout << endl << "以下是数据库中的信息：" << endl;
+	cout << endl << "以下是数据库中的信息：" << endl << endl;
 
 	while (item != NULL)
 	{
@@ -153,6 +161,7 @@ void printAll(bool reverse)
 	Stu* item = Stu::head;
 	int count = 0;
 
+	cout << endl;
 	while (item != NULL)
 	{
 		item->printStu();

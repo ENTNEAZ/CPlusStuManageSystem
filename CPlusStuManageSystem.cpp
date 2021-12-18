@@ -312,7 +312,7 @@ void sort(bool output)
 	return;
 }
 
-void exchange(Stu* item1,Stu* item2)// 交换两个对象
+void exchange(Stu* item1,Stu* item2)// 交换两个对象.
 { 
 	if (item1->getBefore() == nullptr)//这是head 
 	{ 

@@ -12,6 +12,7 @@ void delStu_Name();
 
 void del()
 {
+	system("cls");
 	cout << "----------------------------删除界面----------------------------" << endl;
 	cout << endl;
 	cout << endl;
@@ -48,9 +49,11 @@ void delStu_Id()
 {
 	Stu* item = Stu::head;
 	int id;
+
 	cout << "请输入要删除学生的学号：";
 	cin >> id;
 
+	cout << endl;
 	while (item != nullptr)
 	{
 		if (item->getId() == id)
@@ -72,9 +75,11 @@ void delStu_Name()
 {
 	Stu* item = Stu::head;
 	string iname;
+
 	cout << "请输入要删除学生的姓名：";
 	cin >> iname;
 
+	cout << endl;
 	while (item != nullptr)
 	{
 		if (item->getName() == iname)
