@@ -332,8 +332,8 @@ void exchange(Stu* item1,Stu* item2)// 交换两个对象.
 	{
 		item2->getNext()->setBefore(item1);
 	}
-
 	item1->setNext(item2->getNext());
+
 	item2->setNext(item1);
 	item1->setBefore(item2);
 
