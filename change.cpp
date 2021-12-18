@@ -40,6 +40,7 @@ void change()
 	default:
 		cout << "输入有误，重新输入" << endl;
 		system("pause");
+		return;
 	}
 
 }
