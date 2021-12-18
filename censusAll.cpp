@@ -58,6 +58,7 @@ void censusAll()
 		default:
 			cout << "无法识别，请重新输入！" << endl;
 			system("pause");
+			return;
 		}
 	}
 }

@@ -41,6 +41,7 @@ void search()//(已支持模糊查询)
 	default:
 		cout << "输入有误，重新输入" << endl;
 		system("pause");
+		return;
 	}
 }
 
