@@ -64,7 +64,7 @@ void changeStu_Id()
 
 			item->printStu();
 
-			char name[15], sex[5], field[30], address[100];
+			string name, sex, field, address;
 			float E_grade;
 			int id, year, month, day;
 
