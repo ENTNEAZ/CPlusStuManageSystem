@@ -60,7 +60,8 @@ void Stu::changeInformation(int id, string name, string sex, string field, int y
 void Stu::delStu() 
 //删除该对象
 {
-	if (this->before != nullptr) {//如果是nullptr 那就是没有元素 这是第一个元素
+	if (this->before != nullptr) //如果是nullptr 那就是没有元素 这是第一个元素
+	{
 		this->before->setNext(this->next);
 	}
 	else //操作的是head
