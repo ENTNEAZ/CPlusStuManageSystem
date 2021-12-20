@@ -40,9 +40,6 @@
 									changeInformation()	类_修改信息
 									printStu()			类_打印
 									getNext()			类_获取后指针(目的在于指针后移)
-									birthdayJudge()		出生日期格式判断 
-										isLeap()		闰年判断
-									sexJudge()			性别格式判断 
 						4.	del()						删除 
 								delStu_Id()				搜寻学号删除
 									getId()				类_获取“学号”
